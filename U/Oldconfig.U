@@ -327,7 +327,7 @@ EOM
 				alpha)
 ?X: DEC OSF/1 myuname -a output looks like:  osf1 xxxx t3.2 123.4 alpha
 ?X: where the version number can be either vn.n or tn.n.
-					osname=dec_osf
+					osname=dec_osf1
 					osvers=`echo "$3" | sed 's/^[vt]//'`
 					;;
 			hp*)	osname=hp_osf1	;;
