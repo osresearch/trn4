@@ -63,23 +63,23 @@
 ?X:
 ?MAKE:Loc Mcc awk ar bash bison byacc cat chgrp chmod chown \
 	comm compress cp cpio cpp csh date echo egrep emacs expr find flex \
-	gcc gzip grep inews ksh less line lint ln lp lpr ls mail mailx \
-	make mkdir more mv nroff perl pg pmake pr rm rmail sed sendmail \
-	shar sleep smail sort submit tail tar tbl test touch tr troff \
+	gzip grep inews ksh less line lint ln lp lpr ls mail mailx \
+	make mkdir more mv nm nroff perl pg pmake pr rm rmail sed sendmail \
+	shar sleep smail sort submit tail tar tbl tee test touch tr troff \
     basename diff ed ispell pgp spell vspell who \
 	uname uniq uuname vi zcat zip:  eunicefix n c Instruct Myread \
 	startsh
 ?MAKE:	-pick weed $@ %<
 ?LINT:describe Loc Mcc awk ar bash bison byacc cat chgrp chmod chown \
 	comm compress cp cpio cpp csh date echo egrep emacs expr find flex \
-	gcc gzip grep inews ksh less line lint ln lp lpr ls mail mailx \
-	make mkdir more mv nroff perl pg pmake pr rm rmail sed sendmail \
-	shar sleep smail sort submit tail tar tbl test touch tr troff \
+	gzip grep inews ksh less line lint ln lp lpr ls mail mailx \
+	make mkdir more mv nm nroff perl pg pmake pr rm rmail sed sendmail \
+	shar sleep smail sort submit tail tar tbl tee test touch tr troff \
     basename diff ed ispell pgp spell vspell who \
 	uname uniq uuname vi zcat zip
 ?V::pth loclist trylist
 ?F:./loc
-?T:thisthing thing xxx dir file say _test
+?T:thisthing thing xxx dir file say _test DJGPP
 ?LINT:change PATH
 : find out where common programs are
 echo " "
@@ -117,8 +117,12 @@ for dir in \$*; do
 		echo \$thisthing
 		exit 0
 	elif test -f \$dir/\$thing.exe; then
-		: on Eunice apparently
-		echo \$dir/\$thing
+		if test -n "$DJGPP"; then
+			echo \$dir/\$thing.exe
+		else
+			: on Eunice apparently
+			echo \$dir/\$thing
+		fi
 		exit 0
 	fi
 	;;
@@ -171,7 +175,6 @@ trylist="
 ?egrep:egrep
 ?emacs:emacs
 ?flex:flex
-?gcc:gcc
 ?gzip:gzip
 ?inews:inews
 ?ispell:ispell
@@ -185,6 +188,7 @@ trylist="
 ?mail:mail
 ?mailx:mailx
 ?more:more
+?nm:nm
 ?nroff:nroff
 ?perl:perl
 ?pg:pg
@@ -199,6 +203,7 @@ trylist="
 ?submit:submit
 ?tar:tar
 ?tbl:tbl
+?tee:tee
 ?test:test
 ?troff:troff
 ?uname:uname
@@ -211,9 +216,9 @@ trylist="
 "
 ?LINT:set Loc Mcc awk ar bash bison byacc cat chgrp chmod chown \
 	comm compress cp cpio cpp csh date echo egrep emacs expr find flex \
-	gcc gzip grep inews ksh less line lint ln lp lpr ls mail mailx \
-	make mkdir more mv nroff perl pg pmake pr rm rmail sed sendmail \
-	shar sleep smail sort submit tail tar tbl test touch tr troff \
+	gzip grep inews ksh less line lint ln lp lpr ls mail mailx \
+	make mkdir more mv nm nroff perl pg pmake pr rm rmail sed sendmail \
+	shar sleep smail sort submit tail tar tbl tee test touch tr troff \
     basename diff ed ispell pgp spell vspell who \
 	uname uniq uuname vi zcat zip
 pth=`echo $PATH | sed -e "s/$p_/ /g"`
